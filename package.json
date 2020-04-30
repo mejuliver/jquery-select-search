@@ -1,0 +1,24 @@
+{
+  "name": "select-search",
+  "version": "1.0.0",
+  "description": "A simple jquery search on select options plugin for your website",
+  "main": "jselect-search.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html --public-url ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mejuliver/select-search.git"
+  },
+  "author": "Juliver Galleto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mejuliver/select-search/issues"
+  },
+  "homepage": "https://github.com/mejuliver/select-search#readme",
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "sass": "^1.26.5"
+  }
+}
