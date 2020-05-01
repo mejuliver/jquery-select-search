@@ -38,9 +38,9 @@
         -moz-transition: all .3s ease;
         cursor: pointer;
     }
+    select{ display: none!important}
     .sub-wrapper{
-	   position: relative;
-        select{ display: none;}
+	    position: relative;
         .select-search-sub{
         	width: 100%;
         	position: absolute;
