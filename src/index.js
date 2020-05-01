@@ -8,11 +8,11 @@ if ('undefined' != typeof window.jQuery ) {
             }, options );
 
       return $(this).each(function(){
-
+        let placeholder = ( typeof $(this).attr('data-placeholder')  != 'undefined' ?  $(this).attr('data-placeholder') : settings.placeholder );
         $(this).addClass('select-search')
           .append( `<a href="#" class="trigger"></a>
             <div class="sub-wrapper"><div class="select-search-sub">
-              <input class="select-search-input" type="text" placeholder="${settings.placeholder}" name="select_search_${$(this).index()}">
+              <input class="select-search-input" type="text" placeholder="${placeholder}" name="select_search_${$(this).index()}">
               <ul></ul>
             <div></div>`);
 
