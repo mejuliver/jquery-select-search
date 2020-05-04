@@ -5,7 +5,8 @@ if ('undefined' != typeof window.jQuery ) {
     $.fn.jselect_search = function ( options ) {
       let settings = $.extend({
             placeholder : 'Search here',
-            fillable : false
+            fillable : false,
+            searchable : true
             }, options );
 
       return $(this).each(function(){
@@ -13,7 +14,7 @@ if ('undefined' != typeof window.jQuery ) {
         $(this).addClass('select-search')
           .append( `<a href="#" class="trigger"></a>
             <div class="sub-wrapper"><div class="select-search-sub">
-              <input class="select-search-input" type="text" placeholder="${placeholder}" name="select_search_${$(this).index()}">
+              ${( settings.searchable ? '<input class="select-search-input" type="text" placeholder="'+placeholder+'" name="select_search_'+$(this).index()+'">' : '')}
               <ul></ul>
             <div></div>`);
 
