@@ -24,6 +24,9 @@ then initialize the plugin with your intended element target e.g.
 
 ```
 $(function(){
-    $('.select').jselect_search();
+    $('.select').jselect_search({
+    		placeholder : '', // custom placeholder for the search input on the select dropdown, default to, `Search here...`
+    		fillable : false, // if allowed to create new item on the select dropdown upon enter on the search input, default to false
+    	});
 })
 ```

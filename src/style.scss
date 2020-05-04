@@ -4,6 +4,14 @@
 	min-width: 200px;
 	width: 100%;
     margin-bottom: 8px;
+    &.active .select-search-sub{
+         z-index: 99!important;
+        opacity: 1!important;
+        transform: translate3d(0, 0px, 0)!important;
+        -webkit-transform: translate3d(0, 0px, 0)!important;
+        -moz-transform: translate3d(0, 0px, 0)!important;
+        visibility: visible!important;
+    }
     a.trigger{	
     	height: 50px;
         background: #f5f5f5;
@@ -44,14 +52,19 @@
         .select-search-sub{
         	width: 100%;
         	position: absolute;
-            z-index: 2;
-            z-index: 10;
-            display: none;
+            z-index: -99;
+            opacity: 0;
+            transition: all 0.3s ease;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            transform: translate3d(0, 10px, 0);
+            -webkit-transform: translate3d(0, 10px, 0);
+            -moz-transform: translate3d(0, 10px, 0);
+            visibility: hidden;
             padding: 10px;
             border: 1px solid #ededed;
             box-shadow: 0 10px 40px -6px rgba(0,0,0,.1);
             background: #fff;
-        
             input{
                 box-sizing: border-box;
                 width:100%;

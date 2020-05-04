@@ -4,7 +4,8 @@ if ('undefined' != typeof window.jQuery ) {
 
     $.fn.jselect_search = function ( options ) {
       let settings = $.extend({
-            placeholder : 'Search here'
+            placeholder : 'Search here',
+            fillable : false
             }, options );
 
       return $(this).each(function(){
@@ -27,22 +28,30 @@ if ('undefined' != typeof window.jQuery ) {
         });
         $(this).find('.trigger').click(function(e){
           e.preventDefault();
-          if( $(this).closest('.select-search').find('.select-search-sub').is(':visible') ){
-            $(this).closest('.select-search').find('.select-search-sub').hide();
+          if( $(this).closest('.select-search').hasClass('active') ){
+            $('.select-search.active').removeClass('active')
           }else{
-            $(this).closest('.select-search').find('.select-search-sub input').val('');
-            $(this).closest('.select-search').find('.select-search-sub ul li').show();
-            $(this).closest('.select-search').find('.select-search-sub').show();
+            $(this).closest('.select-search').find('.select-search-sub li').show();
+            $(this).closest('.select-search').addClass('active').find('.select-search-sub input').val('');
+            
           }
         });
 
         $(this).find('.select-search-sub input').on('input', function() {
             let v = $(this).val().toLowerCase();
-            console.log( v );
             $(this).closest('.select-search').find('.select-search-sub ul li').hide().filter(function() {
                 let n = $(this).find("a").text().toLowerCase();
                 return n.indexOf(v) > -1;
           }).fadeIn(200);
+        });
+
+        $(this).find('.select-search-sub input').on('keydown',function(e){
+          if ( (e.keyCode == 32 || e.which == 13 || e.keyCode == 13 ) && settings.fillable ) {
+            $(this).closest('.select-search').find('.trigger').text($(this).val());
+            $(this).closest('.select-search').find('.select-search-sub ul').append('<li><a href="#" data-value="'+$(this).val()+'">'+$(this).val()+'</a></li>');
+            $(this).closest('.select-search').find('select').append('<option value="'+$(this).val()+'">'+$(this).val()+'</option>').val($(this).val());
+            $('.select-search.active').removeClass('active')
+          }
         });
       });
     };
@@ -51,14 +60,14 @@ if ('undefined' != typeof window.jQuery ) {
     $(document).on("mousedown touchstart", function(e) {
         var dp = $('.select-search-sub:visible');
         if (!dp.is(e.target) && dp.has(e.target).length === 0) {
-            $('.select-search-sub').hide();
+            $('.select-search.active').removeClass('active')
         }
     });
 
     $(document).on('click','.select-search-sub ul li a',function(e){
         e.preventDefault();
         $(this).closest('.select-search').find('select option[value="'+$(this).attr('data-value')+'"]').prop('selected',true).closest('select').trigger('change');
-        $(this).closest('.select-search').find('.trigger').text($(this).text());
-        $(this).closest('.select-search-sub').hide();
+        $('.select-search.active').removeClass('active')
+        .find('.trigger').text($(this).text());
       });
 }
