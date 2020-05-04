@@ -26,7 +26,13 @@ then initialize the plugin with your intended element target e.g.
 $(function(){
     $('.select').jselect_search({
     		placeholder : '', // custom placeholder for the search input on the select dropdown, default to, `Search here...`
-    		fillable : false, // if allowed to create new item on the select dropdown upon enter on the search input, default to false
+    		fillable : false, // if allowed to create new item on the select dropdown upon enter on the search input, default to 
+            on_top_edge : function(e){ // if you reach the top edge of the dropdown upon scrolling, this function will be called and the instance of the element will be pass on as argument, default to false
+
+            },
+            on_bottom_edge : function(e){ // if you reach the bottom edge of the dropdown upon scrolling, this function will be called and the instance of the element will be pass on as argument, default to false
+
+            },
     	});
 })
 ```

@@ -6,7 +6,9 @@ if ('undefined' != typeof window.jQuery ) {
       let settings = $.extend({
             placeholder : 'Search here',
             fillable : false,
-            searchable : true
+            searchable : true,
+            on_top_edge : false,
+            on_bottom_edge : false,
             }, options );
 
       return $(this).each(function(){
@@ -16,7 +18,21 @@ if ('undefined' != typeof window.jQuery ) {
             <div class="sub-wrapper"><div class="select-search-sub">
               ${( settings.searchable ? '<input class="select-search-input" type="text" placeholder="'+placeholder+'" name="select_search_'+$(this).index()+'">' : '')}
               <ul></ul>
-            <div></div>`);
+            <div></div>`).find('.select-search-sub ul').on('scroll',function(){
+
+              //visible height + pixel scrolled = total height 
+              if( this.offsetHeight + this.scrollTop == this.scrollHeight){
+                if( settings.on_bottom_edge && typeof settings.on_bottom_edge == 'function' ){
+                  settings.on_bottom_edge(this);
+                }
+              }
+
+              if( this.scrollTop == 0 ){
+                if( settings.on_top_edge && typeof settings.on_top_edge == 'function' ){
+                  settings.on_top_edge(this);
+                } 
+              }
+            });
 
         let _default_text = $(this).find('select option:selected').text();
 
@@ -61,18 +77,18 @@ if ('undefined' != typeof window.jQuery ) {
     $(document).on("mousedown touchstart", function(e) {
         var dp = $('.select-search-sub:visible,.clear-btn');
         if (!dp.is(e.target) && dp.has(e.target).length === 0) {
-            $('.select-search.active').removeClass('active')
+          $('.select-search.active').removeClass('active')
         }
     });
 
     $(document).on('click','.select-search-sub ul li a',function(e){
-        e.preventDefault();
-        $(this).closest('.select-search').find('select option[value="'+$(this).attr('data-value')+'"]').prop('selected',true).closest('select').trigger('change');
-        $('.select-search.active').removeClass('active')
-        .find('.trigger').html('<span class="clear-btn"></span> '+$(this).text()).find('span.clear-btn').on('click',function(e){
-          e.stopPropagation();
-          $(this).closest('.select-search').find('select').val('');
-          $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
-        });
+      e.preventDefault();
+      $(this).closest('.select-search').find('select option[value="'+$(this).attr('data-value')+'"]').prop('selected',true).closest('select').trigger('change');
+      $('.select-search.active').removeClass('active')
+      .find('.trigger').html('<span class="clear-btn"></span> '+$(this).text()).find('span.clear-btn').on('click',function(e){
+        e.stopPropagation();
+        $(this).closest('.select-search').find('select').val('');
+        $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
       });
+    });
 }
