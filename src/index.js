@@ -27,7 +27,7 @@ if ('undefined' != typeof window.jQuery ) {
             $(this).closest('.select-search').find('.select-search-sub ul').append('<li><a href="#" data-value="'+$(this).val()+'">'+$(this).text()+'</a></li>');
           }
         });
-        $(this).find('.trigger').click(function(e){
+        $(this).find('.trigger').on('click',function(e){
           e.preventDefault();
           if( $(this).closest('.select-search').hasClass('active') ){
             $('.select-search.active').removeClass('active')
@@ -59,7 +59,7 @@ if ('undefined' != typeof window.jQuery ) {
 
     //event click j menu listener
     $(document).on("mousedown touchstart", function(e) {
-        var dp = $('.select-search-sub:visible');
+        var dp = $('.select-search-sub:visible,.clear-btn');
         if (!dp.is(e.target) && dp.has(e.target).length === 0) {
             $('.select-search.active').removeClass('active')
         }
@@ -69,6 +69,10 @@ if ('undefined' != typeof window.jQuery ) {
         e.preventDefault();
         $(this).closest('.select-search').find('select option[value="'+$(this).attr('data-value')+'"]').prop('selected',true).closest('select').trigger('change');
         $('.select-search.active').removeClass('active')
-        .find('.trigger').text($(this).text());
+        .find('.trigger').html('<span class="clear-btn"></span> '+$(this).text()).find('span.clear-btn').on('click',function(e){
+          e.stopPropagation();
+          $(this).closest('.select-search').find('select').val('');
+          $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
+        });
       });
 }

@@ -33,6 +33,20 @@
         cursor: pointer;
         display: flex;
     	align-items: center;
+        span.clear-btn{
+            background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMjU2LDBDMTE0Ljg0NCwwLDAsMTE0Ljg0NCwwLDI1NnMxMTQuODQ0LDI1NiwyNTYsMjU2czI1Ni0xMTQuODQ0LDI1Ni0yNTZTMzk3LjE1NiwwLDI1NiwweiBNMzU5LjU0LDMyOS4zNzQgICAgYzQuMTY3LDQuMTY1LDQuMTY3LDEwLjkxOSwwLDE1LjA4NUwzNDQuNDYsMzU5LjU0Yy00LjE2Nyw0LjE2NS0xMC45MTksNC4xNjUtMTUuMDg2LDBMMjU2LDI4Ni4xNjdsLTczLjM3NCw3My4zNzQgICAgYy00LjE2Nyw0LjE2NS0xMC45MTksNC4xNjUtMTUuMDg2LDBsLTE1LjA4MS0xNS4wODJjLTQuMTY3LTQuMTY1LTQuMTY3LTEwLjkxOSwwLTE1LjA4NWw3My4zNzQtNzMuMzc1bC03My4zNzQtNzMuMzc0ICAgIGMtNC4xNjctNC4xNjUtNC4xNjctMTAuOTE5LDAtMTUuMDg1bDE1LjA4MS0xNS4wODJjNC4xNjctNC4xNjUsMTAuOTE5LTQuMTY1LDE1LjA4NiwwTDI1NiwyMjUuODMybDczLjM3NC03My4zNzQgICAgYzQuMTY3LTQuMTY1LDEwLjkxOS00LjE2NSwxNS4wODYsMGwxNS4wODEsMTUuMDgyYzQuMTY3LDQuMTY1LDQuMTY3LDEwLjkxOSwwLDE1LjA4NWwtNzMuMzc0LDczLjM3NEwzNTkuNTQsMzI5LjM3NHoiIGZpbGw9IiMwMDAwMDAiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+            background-repeat:no-repeat;
+            background-size: 14px 14px;
+            width:14px;
+            height:14px;
+            display:inline-block;
+            margin-right:12px!important;
+            cursor:pointer;
+            opacity:.5;
+            &:hover{
+                opacity:1!important;
+            }
+        }
     }
     i{
         position: absolute;
