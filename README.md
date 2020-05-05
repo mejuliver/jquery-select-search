@@ -36,6 +36,9 @@ $(function(){
             },
             on_change : function(e){ // on change event on the items upon selection of an item from the list, this function will trigger, passing the instance of the select element, otherwise, on change event will be ignored
 
+            },
+            on_active : function(){ // when dropdown has been activated with return the total instance of the initialized element, default to false
+
             }
     	});
 })

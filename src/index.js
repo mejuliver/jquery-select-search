@@ -5,11 +5,12 @@ if ('undefined' != typeof window.jQuery ) {
     $.fn.jselect_search = function ( options ) {
       let settings = $.extend({
             placeholder : 'Search here',
-            fillable : false,
-            searchable : true,
-            on_top_edge : false,
-            on_bottom_edge : false,
-            on_change : false,
+            fillable : false, // allow if custom item will be added when hit enter on the search input
+            searchable : true, // determine if allow search on items or return the searchable function with return the value of the search input
+            on_top_edge : false, // on reach top edge of dropdown wrapper trigger function
+            on_bottom_edge : false, // on reach bottom edge of dropdown wrapper trigger function
+            on_change : false, // on change function to be triggered with return the select element of the initialized element
+            on_active : false, // when dropdown has been activated with return the total instance of the initialized element
             }, options );
 
       let debounce = function(func, wait, immediate) {
@@ -66,10 +67,15 @@ if ('undefined' != typeof window.jQuery ) {
         $(this).find('.trigger').on('click',function(e){
           e.preventDefault();
           if( $(this).closest('.select-search').hasClass('active') ){
-            $(this).closest('.select-search').removeClass('active');
+            $('.select-search.active').removeClass('active');
+
           }else{
             $(this).closest('.select-search').find('.select-search-sub li').show();
             $(this).closest('.select-search').addClass('active').find('.select-search-sub input').val('');
+
+            if( settings.on_active && typeof settings.on_active == 'function' ){
+              settings.on_active($(this).closest('.select-search'));
+            }
             
           }
         });
@@ -109,7 +115,7 @@ if ('undefined' != typeof window.jQuery ) {
     $(document).on("mousedown touchstart", function(e) {
         var dp = $('.select-search-sub:visible,.clear-btn,.trigger');
         if (!dp.is(e.target) && dp.has(e.target).length === 0) {
-          $('.select-search.active').removeClass('active')
+          $('.select-search.active').removeClass('active');
         }
     });
 
