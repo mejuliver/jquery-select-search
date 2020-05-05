@@ -9,7 +9,26 @@ if ('undefined' != typeof window.jQuery ) {
             searchable : true,
             on_top_edge : false,
             on_bottom_edge : false,
+            on_change : false,
             }, options );
+
+      let debounce = function(func, wait, immediate) {
+
+        var timeout;
+
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+      }
 
       return $(this).each(function(){
         let placeholder = ( typeof $(this).attr('data-placeholder')  != 'undefined' ?  $(this).attr('data-placeholder') : settings.placeholder );
@@ -19,7 +38,6 @@ if ('undefined' != typeof window.jQuery ) {
               ${( settings.searchable ? '<input class="select-search-input" type="text" placeholder="'+placeholder+'" name="select_search_'+$(this).index()+'">' : '')}
               <ul></ul>
             <div></div>`).find('.select-search-sub ul').on('scroll',function(){
-
               //visible height + pixel scrolled = total height 
               if( this.offsetHeight + this.scrollTop == this.scrollHeight){
                 if( settings.on_bottom_edge && typeof settings.on_bottom_edge == 'function' ){
@@ -54,13 +72,25 @@ if ('undefined' != typeof window.jQuery ) {
           }
         });
 
-        $(this).find('.select-search-sub input').on('input', function() {
+        $(this).find('select').on('change',function(){
+          if( settings.on_change && typeof settings.on_change == 'function' ){
+            settings.on_change($(this));
+          }
+        });
+
+        $(this).find('.select-search-sub input').on('input', debounce( function(){
+          if( settings.searchable && typeof settings.searchable != 'function' ){
             let v = $(this).val().toLowerCase();
             $(this).closest('.select-search').find('.select-search-sub ul li').hide().filter(function() {
-                let n = $(this).find("a").text().toLowerCase();
-                return n.indexOf(v) > -1;
-          }).fadeIn(200);
-        });
+                  let n = $(this).find("a").text().toLowerCase();
+                  return n.indexOf(v) > -1;
+            }).fadeIn(200);
+          }
+
+          if( settings.searchable && typeof settings.searchable == 'function' ){
+            settings.searchable($(this).val());
+          }
+        },500));
 
         $(this).find('.select-search-sub input').on('keydown',function(e){
           if ( (e.keyCode == 32 || e.which == 13 || e.keyCode == 13 ) && settings.fillable ) {
@@ -80,6 +110,7 @@ if ('undefined' != typeof window.jQuery ) {
           $('.select-search.active').removeClass('active')
         }
     });
+
 
     $(document).on('click','.select-search-sub ul li a',function(e){
       e.preventDefault();

@@ -48,15 +48,24 @@
 
 			$('#state').jselect_search({
 				fillable : true, // allow custom item on the dropdown upon search input trigger
-				searchable : true, // set to searchable items
+				searchable : function(e){
+					console.log(e)
+				}, // set to searchable items
+				on_change : function(){
+					alert();
+				},
 				on_top_edge : function(){
 					if( parseInt( $('#state').attr('data-pagination') ) > 1 ){
 						$('#state').attr('data-pagination',parseInt( $('#state').attr('data-pagination') )-1);
+
+						alert(  $('#state').attr('data-pagination') );
 					}
 				},
 				on_bottom_edge : function(){
 					if( parseInt( $('#state').attr('data-pagination') ) >= 1 ){
 						$('#state').attr('data-pagination',parseInt( $('#state').attr('data-pagination') )+1);
+
+						alert(  $('#state').attr('data-pagination') );
 					}
 				}
 			});
