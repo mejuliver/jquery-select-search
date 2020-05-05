@@ -11,6 +11,7 @@ if ('undefined' != typeof window.jQuery ) {
             on_bottom_edge : false, // on reach bottom edge of dropdown wrapper trigger function
             on_change : false, // on change function to be triggered with return the select element of the initialized element
             on_active : false, // when dropdown has been activated with return the total instance of the initialized element
+            on_clear : false, // a funciton triggers upon click on the clear button
             }, options );
 
       let debounce = function(func, wait, immediate) {
@@ -70,6 +71,7 @@ if ('undefined' != typeof window.jQuery ) {
             $('.select-search.active').removeClass('active');
 
           }else{
+            $('.select-search.active').removeClass('active'); // remove all active class first
             $(this).closest('.select-search').find('.select-search-sub li').show();
             $(this).closest('.select-search').addClass('active').find('.select-search-sub input').val('');
 
@@ -128,6 +130,10 @@ if ('undefined' != typeof window.jQuery ) {
         e.stopPropagation();
         $(this).closest('.select-search').find('select').val('');
         $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
+
+        if( settings.hasOwnProperty('on_clear') && typeof settings.on_clear == 'function' ){
+          settings.clear($(this).closest('.select-search'));
+        }
       });
     });
 }

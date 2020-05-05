@@ -34,10 +34,13 @@ $(function(){
             on_bottom_edge : function(e){ // if you reach the bottom edge of the dropdown upon scrolling, this function will be called and the instance of the element will be pass on as argument, default to false
 
             },
-            on_change : function(e){ // on change event on the items upon selection of an item from the list, this function will trigger, passing the instance of the select element, otherwise, on change event will be ignored
+            on_change : function(e){ // on change event on the items upon selection of an item from the list, this function will trigger passing the instance of the select element, otherwise, on change event will be ignored
 
             },
             on_active : function(){ // when dropdown has been activated with return the total instance of the initialized element, default to false
+
+            },
+            on_clear :function(), // a funciton triggers upon click on the clear button passing the instance of the initialized element, default to false
 
             }
     	});
