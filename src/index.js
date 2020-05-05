@@ -39,16 +39,18 @@ if ('undefined' != typeof window.jQuery ) {
               <ul></ul>
             <div></div>`).find('.select-search-sub ul').on('scroll',function(){
               //visible height + pixel scrolled = total height 
-              if( this.offsetHeight + this.scrollTop == this.scrollHeight){
-                if( settings.on_bottom_edge && typeof settings.on_bottom_edge == 'function' ){
-                  settings.on_bottom_edge(this);
+              if( $(this).innerHeight() > 300 ){
+                if( this.offsetHeight + this.scrollTop == this.scrollHeight){
+                  if( settings.on_bottom_edge && typeof settings.on_bottom_edge == 'function' ){
+                    settings.on_bottom_edge(this);
+                  }
                 }
-              }
 
-              if( this.scrollTop == 0 ){
-                if( settings.on_top_edge && typeof settings.on_top_edge == 'function' ){
-                  settings.on_top_edge(this);
-                } 
+                if( this.scrollTop == 0 ){
+                  if( settings.on_top_edge && typeof settings.on_top_edge == 'function' ){
+                    settings.on_top_edge(this);
+                  } 
+                }
               }
             });
 
