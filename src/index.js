@@ -111,29 +111,30 @@ if ('undefined' != typeof window.jQuery ) {
           }
         });
       });
-    };
-
-    //event click j menu listener
-    $(document).on("mousedown touchstart", function(e) {
-        var dp = $('.select-search-sub:visible,.clear-btn,.trigger');
-        if (!dp.is(e.target) && dp.has(e.target).length === 0) {
-          $('.select-search.active').removeClass('active');
-        }
-    });
 
 
-    $(document).on('click','.select-search-sub ul li a',function(e){
-      e.preventDefault();
-      $(this).closest('.select-search').find('select option[value="'+$(this).attr('data-value')+'"]').prop('selected',true).closest('select').trigger('change');
-      $('.select-search.active').removeClass('active')
-      .find('.trigger').html('<span class="clear-btn"></span> '+$(this).text()).find('span.clear-btn').on('click',function(e){
-        e.stopPropagation();
-        $(this).closest('.select-search').find('select').val('');
-        $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
-
-        if( settings.hasOwnProperty('on_clear') && typeof settings.on_clear == 'function' ){
-          settings.clear($(this).closest('.select-search'));
-        }
+      //event click j menu listener
+      $(document).on("mousedown touchstart", function(e) {
+          var dp = $('.select-search-sub:visible,.clear-btn,.trigger');
+          if (!dp.is(e.target) && dp.has(e.target).length === 0) {
+            $('.select-search.active').removeClass('active');
+          }
       });
-    });
+
+
+      $(document).on('click','.select-search-sub ul li a',function(e){
+        e.preventDefault();
+        $(this).closest('.select-search').find('select option[value="'+$(this).attr('data-value')+'"]').prop('selected',true).closest('select').trigger('change');
+        $('.select-search.active').removeClass('active')
+        .find('.trigger').html('<span class="clear-btn"></span> '+$(this).text()).find('span.clear-btn').on('click',function(e){
+          e.stopPropagation();
+          $(this).closest('.select-search').find('select').val('');
+          $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
+
+          if( settings.hasOwnProperty('on_clear') && typeof settings.on_clear == 'function' ){
+            settings.clear($(this).closest('.select-search'));
+          }
+        });
+      });
+    };
 }
