@@ -69,8 +69,8 @@ if ('undefined' != typeof window.jQuery ) {
       $(this).find('.trigger').on('click',function(e){
         e.preventDefault();
         if( $(this).closest('.select-search').hasClass('active') ){
+          $('.select-search.active select').trigger('focusout');
           $('.select-search.active').removeClass('active');
-
         }else{
           $('.select-search.active').removeClass('active'); // remove all active class first
           $(this).closest('.select-search').find('.select-search-sub li').show();
@@ -118,7 +118,9 @@ if ('undefined' != typeof window.jQuery ) {
   $(document).on("mousedown touchstart", function(e) {
       var dp = $('.select-search-sub:visible,.clear-btn,.trigger');
       if (!dp.is(e.target) && dp.has(e.target).length === 0) {
+        $('.select-search.active select').trigger('focusout');
         $('.select-search.active').removeClass('active');
+
       }
   });
 
