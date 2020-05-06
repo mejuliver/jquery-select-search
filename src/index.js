@@ -2,8 +2,6 @@ import './style.scss';
 
 if ('undefined' != typeof window.jQuery ) {
 
-  var ss_settings = {};  
-
   $.fn.jselect_search = function ( options ) {
     let settings = $.extend({
           placeholder : 'Search here',
@@ -13,10 +11,8 @@ if ('undefined' != typeof window.jQuery ) {
           on_bottom_edge : false, // on reach bottom edge of dropdown wrapper trigger function
           on_change : false, // on change function to be triggered with return the select element of the initialized element
           on_active : false, // when dropdown has been activated with return the total instance of the initialized element
-          on_clear : false, // a funciton triggers upon click on the clear button
+          on_clear_reflect : [], // clear other simblings, simblings must be id
           }, options );
-
-    window.ss_settings = settings;
 
     let debounce = function(func, wait, immediate) {
 
@@ -39,6 +35,7 @@ if ('undefined' != typeof window.jQuery ) {
     return $(this).each(function(){
       let placeholder = ( typeof $(this).attr('data-placeholder')  != 'undefined' ?  $(this).attr('data-placeholder') : settings.placeholder );
       $(this).addClass('select-search')
+        .attr('data-clear-simblings',settings.on_clear_reflect.join(','))
         .append( `<a href="#" class="trigger"></a>
           <div class="sub-wrapper"><div class="select-search-sub">
             ${( settings.searchable ? '<input class="select-search-input" type="text" placeholder="'+placeholder+'" name="select_search_'+$(this).index()+'">' : '')}
@@ -125,9 +122,9 @@ if ('undefined' != typeof window.jQuery ) {
       }
   });
 
-
   $(document).on('click','.select-search-sub ul li a',function(e){
     e.preventDefault();
+    let _this = $(this);
     $(this).closest('.select-search').find('select option[value="'+$(this).attr('data-value')+'"]').prop('selected',true).closest('select').trigger('change');
     $('.select-search.active').removeClass('active')
     .find('.trigger').html('<span class="clear-btn"></span> '+$(this).text()).find('span.clear-btn').on('click',function(e){
@@ -135,9 +132,14 @@ if ('undefined' != typeof window.jQuery ) {
       $(this).closest('.select-search').find('select').val('');
       $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
 
-      if( window.ss_settings.hasOwnProperty('on_clear') && typeof window.ss_settings.on_clear == 'function' ){
-        window.ss_settings.clear($(this).closest('.select-search'));
-      }
+      // clear simblings
+      let sims = _this.closest('.select-search').attr('data-clear-simblings');
+
+      $.each( sims.split(','),function(i,e){
+        $(e).find('.trigger').html( $(e).find('select option[value=""]').text());
+        $(e).find('select').val('');
+      });
+      
     });
   });
 }

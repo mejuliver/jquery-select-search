@@ -40,9 +40,7 @@ $(function(){
             on_active : function(){ // when dropdown has been activated with return the total instance of the initialized element, default to false
 
             },
-            on_clear :function(), // a funciton triggers upon click on the clear button passing the instance of the initialized element, default to false
-
-            }
+            on_clear_reflect : [], // clear other simblings upon click clear button, simblings must be an array of ids of initialized select search element e.g. ['#el1','#el2', '#el3'], default to empty array
     	});
 })
 ```

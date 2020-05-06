@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<div style="width:400px;">
-		<div class="select">
+		<div class="select" id="el1">
 			<i class="ti-angle-down"></i>
 			<select name="select" id="select">
 				<option value="" selected>Choose option</option>
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div style="width:400px;">
-		<div class="select">
+		<div class="select" id="el2">
 			<i class="ti-angle-down"></i>
 			<select name="select" id="select">
 				<option value="" selected>Choose option</option>
@@ -47,6 +47,7 @@
 			$('#state').attr('data-pagination',1);
 
 			$('#state').jselect_search({
+				on_clear_reflect : ['#el1','#el2'],
 				fillable : true, // allow custom item on the dropdown upon search input trigger
 				searchable : function(e){
 					console.log(e)
