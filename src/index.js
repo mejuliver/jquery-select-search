@@ -133,7 +133,7 @@ if ('undefined' != typeof window.jQuery ) {
       e.stopPropagation();
       $(this).closest('.select-search').find('select').val('');
       $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
-
+      $('.select-search.active').removeClass('active');
       // clear simblings
       let sims = _this.closest('.select-search').attr('data-clear-simblings');
 

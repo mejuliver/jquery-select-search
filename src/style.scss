@@ -12,6 +12,10 @@
         -moz-transform: translate3d(0, 0px, 0)!important;
         visibility: visible!important;
     }
+    &.disabled{
+        pointer-events:none!important;
+        opacit:.7!important;
+    }
     a.trigger{	
     	height: 50px;
         background: #f5f5f5;
