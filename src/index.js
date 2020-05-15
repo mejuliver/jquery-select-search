@@ -34,6 +34,14 @@ if ('undefined' != typeof window.jQuery ) {
 
     return $(this).each(function(){
       let placeholder = ( typeof $(this).attr('data-placeholder')  != 'undefined' ?  $(this).attr('data-placeholder') : settings.placeholder );
+
+      // add disabled class if select is disabled
+      if( $(this).find('select:disabled').length > 0 ){
+        $(this).addClass('disabled');
+      }else{
+        $(this).removeClass('disabled');
+      }
+
       $(this).addClass('select-search')
         .attr('data-clear-simblings',settings.on_clear_reflect.join(','))
         .append( `<a href="#" class="trigger"></a>
