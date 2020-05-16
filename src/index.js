@@ -35,6 +35,14 @@ if ('undefined' != typeof window.jQuery ) {
 
     return $(this).each(function(){
       let placeholder = ( typeof $(this).attr('data-placeholder')  != 'undefined' ?  $(this).attr('data-placeholder') : settings.placeholder );
+
+      // add disabled class if select is disabled
+      if( $(this).find('select:disabled').length > 0 ){
+        $(this).addClass('disabled');
+      }else{
+        $(this).removeClass('disabled');
+      }
+
       $(this).addClass('select-search')
         .attr('data-clear-simblings',settings.on_clear_reflect.join(','))
         .append( `<a href="#" class="trigger"></a>
@@ -140,9 +148,9 @@ if ('undefined' != typeof window.jQuery ) {
     $('.select-search.active').removeClass('active')
     .find('.trigger').html('<span class="clear-btn"></span> '+$(this).text()).find('span.clear-btn').on('click',function(e){
       e.stopPropagation();
-      $(this).closest('.select-search').find('select').val('');
+      $(this).closest('.select-search').find('select').val('').trigger('change');
       $(this).closest('.trigger').html( $(this).closest('.select-search').find('select option[value=""]').text());
-
+      $('.select-search.active').removeClass('active');
       // clear simblings
       let sims = _this.closest('.select-search').attr('data-clear-simblings');
 
