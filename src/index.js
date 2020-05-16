@@ -12,6 +12,7 @@ if ('undefined' != typeof window.jQuery ) {
           on_change : false, // on change function to be triggered with return the select element of the initialized element
           on_active : false, // when dropdown has been activated with return the total instance of the initialized element
           on_clear_reflect : [], // clear other simblings, simblings must be id
+          disable_text_update : false // dont update the select text upon successfully click on items, default false
           }, options );
 
     let debounce = function(func, wait, immediate) {
@@ -40,22 +41,27 @@ if ('undefined' != typeof window.jQuery ) {
           <div class="sub-wrapper"><div class="select-search-sub">
             ${( settings.searchable ? '<input class="select-search-input" type="text" placeholder="'+placeholder+'" name="select_search_'+$(this).index()+'">' : '')}
             <ul></ul>
-          <div></div>`).find('.select-search-sub ul').on('scroll',function(){
-            //visible height + pixel scrolled = total height 
-            if( $(this).innerHeight() > 300 ){
-              if( this.offsetHeight + this.scrollTop == this.scrollHeight){
-                if( settings.on_bottom_edge && typeof settings.on_bottom_edge == 'function' ){
-                  settings.on_bottom_edge(this);
-                }
-              }
-
-              if( this.scrollTop == 0 ){
-                if( settings.on_top_edge && typeof settings.on_top_edge == 'function' ){
-                  settings.on_top_edge(this);
-                } 
+          <div></div>`
+      ).find('.select-search-sub ul').on('scroll',function(){
+          //visible height + pixel scrolled = total height 
+          if( $(this).innerHeight() > 300 ){
+            if( this.offsetHeight + this.scrollTop == this.scrollHeight){
+              if( settings.on_bottom_edge && typeof settings.on_bottom_edge == 'function' ){
+                settings.on_bottom_edge(this);
               }
             }
-          });
+
+            if( this.scrollTop == 0 ){
+              if( settings.on_top_edge && typeof settings.on_top_edge == 'function' ){
+                settings.on_top_edge(this);
+              } 
+            }
+          }
+       });
+
+      if( settings.disable_text_update ){
+        $(this).addClass('disable-text-update')
+      }
 
       let _default_text = $(this).find('select option:selected').text();
 
@@ -128,6 +134,9 @@ if ('undefined' != typeof window.jQuery ) {
     e.preventDefault();
     let _this = $(this);
     $(this).closest('.select-search').find('select option[value="'+$(this).attr('data-value')+'"]').prop('selected',true).closest('select').trigger('change');
+    if( $(this).closest('.select-search').hasClass('disable-text-update') ){
+      return;
+    }
     $('.select-search.active').removeClass('active')
     .find('.trigger').html('<span class="clear-btn"></span> '+$(this).text()).find('span.clear-btn').on('click',function(e){
       e.stopPropagation();

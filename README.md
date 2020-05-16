@@ -41,6 +41,7 @@ $(function(){
 
             },
             on_clear_reflect : [], // clear other simblings upon click clear button, simblings must be an array of ids of initialized select search element e.g. ['#el1','#el2', '#el3'], default to empty array
+            disable_text_update : false // dont update the select text upon successfully click on items, default false
     	});
 })
 ```
