@@ -12,7 +12,8 @@ if ('undefined' != typeof window.jQuery ) {
           on_change : false, // on change function to be triggered with return the select element of the initialized element
           on_active : false, // when dropdown has been activated with return the total instance of the initialized element
           on_clear_reflect : [], // clear other simblings, simblings must be id
-          disable_text_update : false // dont update the select text upon successfully click on items, default false
+          disable_text_update : false, // dont update the select text upon successfully click on items, default false
+          on_created : false // called after creation of the UI, passing the element instance
           }, options );
 
     let debounce = function(func, wait, immediate) {
@@ -125,6 +126,9 @@ if ('undefined' != typeof window.jQuery ) {
           $('.select-search.active').removeClass('active')
         }
       });
+      if( settings.on_created ){
+        settings.on_created($(this));
+      }
     });
   };
 

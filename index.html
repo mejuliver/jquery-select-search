@@ -41,7 +41,10 @@
 		$(function(){
 			$('.select').jselect_search({
 				fillable : true, // allow custom item on the dropdown upon search input trigger
-				searchable : true // set to searchable items
+				searchable : true, // set to searchable items
+				on_created : function(e){
+					console.log( e )
+				}
 			});
 
 			$('#state').attr('data-pagination',1);

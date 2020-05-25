@@ -37,11 +37,14 @@ $(function(){
             on_change : function(e){ // on change event on the items upon selection of an item from the list, this function will trigger passing the instance of the select element, otherwise, on change event will be ignored
 
             },
-            on_active : function(){ // when dropdown has been activated with return the total instance of the initialized element, default to false
+            on_active : function(e){ // when dropdown has been activated with return the total instance of the initialized element, default to false
 
             },
             on_clear_reflect : [], // clear other simblings upon click clear button, simblings must be an array of ids of initialized select search element e.g. ['#el1','#el2', '#el3'], default to empty array
-            disable_text_update : false // dont update the select text upon successfully click on items, default false
+            disable_text_update : false, // dont update the select text upon successfully click on items, default false
+            on_created : function(e){ // called after creation of the UI, passing the element instance
+
+            }
     	});
 })
 ```
