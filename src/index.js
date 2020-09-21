@@ -4,17 +4,17 @@ if ('undefined' != typeof window.jQuery ) {
 
   $.fn.jselect_search = function ( options ) {
     let settings = $.extend({
-          placeholder : 'Search here',
-          fillable : false, // allow if custom item will be added when hit enter on the search input
-          searchable : true, // determine if allow search on items or return the searchable function with return the value of the search input
-          on_top_edge : false, // on reach top edge of dropdown wrapper trigger function
-          on_bottom_edge : false, // on reach bottom edge of dropdown wrapper trigger function
-          on_change : false, // on change function to be triggered with return the select element of the initialized element
-          on_active : false, // when dropdown has been activated with return the total instance of the initialized element
-          on_clear_reflect : [], // clear other simblings, simblings must be id
-          disable_text_update : false, // dont update the select text upon successfully click on items, default false
-          on_created : false // called after creation of the UI, passing the element instance
-          }, options );
+        placeholder : 'Search here',
+        fillable : false, // allow if custom item will be added when hit enter on the search input
+        searchable : true, // determine if allow search on items or return the searchable function with return the value of the search input
+        on_top_edge : false, // on reach top edge of dropdown wrapper trigger function
+        on_bottom_edge : false, // on reach bottom edge of dropdown wrapper trigger function
+        on_change : false, // on change function to be triggered with return the select element of the initialized element
+        on_active : false, // when dropdown has been activated with return the total instance of the initialized element
+        on_clear_reflect : [], // clear other simblings, simblings must be id
+        disable_text_update : false, // dont update the select text upon successfully click on items, default false
+        on_created : false // called after creation of the UI, passing the element instance
+        }, options );
 
     let debounce = function(func, wait, immediate) {
 
