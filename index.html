@@ -3,6 +3,24 @@
 <head>
 	<title>JSelect Search</title>
 	<link rel="stylesheet" href="https://cnmain.connectnigeria.com/assets/plugins/foundry/css/themify-icons.css">
+	<style>
+		.load-prev{
+			margin-bottom: 8px;
+		    display: block;
+		    padding: 5px 12px;
+		    background: #F5F5F5F5;
+		    font-size: 12px;
+		    text-align: center;
+		}
+		.load-next{
+			margin-top: 8px;
+		    display: block;
+		    padding: 5px 12px;
+		    background: #F5F5F5F5;
+		    font-size: 12px;
+		    text-align: center;
+		}
+	</style>
 </head>
 <body>
 	<div style="width:400px;">
@@ -41,10 +59,7 @@
 		$(function(){
 			$('.select').jselect_search({
 				fillable : true, // allow custom item on the dropdown upon search input trigger
-				searchable : true, // set to searchable items
-				on_created : function(e){
-					console.log( e )
-				}
+				searchable : true, // set to searchable items				
 			});
 
 			$('#state').attr('data-pagination',1);
@@ -58,19 +73,24 @@
 				on_change : function(){
 					alert();
 				},
-				on_top_edge : function(){
+				on_top_edge : function(e){
 					if( parseInt( $('#state').attr('data-pagination') ) > 1 ){
 						$('#state').attr('data-pagination',parseInt( $('#state').attr('data-pagination') )-1);
-
+						e.find('.load-next').hide();
+						e.find('.load-prev').show();
 						alert(  $('#state').attr('data-pagination') );
 					}
 				},
-				on_bottom_edge : function(){
+				on_bottom_edge : function(e){
 					if( parseInt( $('#state').attr('data-pagination') ) >= 1 ){
+						e.find('.load-prev').hide();
+						e.find('.load-next').show();
 						$('#state').attr('data-pagination',parseInt( $('#state').attr('data-pagination') )+1);
-
-						alert(  $('#state').attr('data-pagination') );
 					}
+				},
+				on_created : function(e){					
+					e.find('.load-prev').text('Load previous...').hide();
+					e.find('.load-next').text('Load more...').hide();
 				}
 			});
 		});

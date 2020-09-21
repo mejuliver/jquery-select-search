@@ -49,20 +49,21 @@ if ('undefined' != typeof window.jQuery ) {
         .append( `<a href="#" class="trigger"></a>
           <div class="sub-wrapper"><div class="select-search-sub">
             ${( settings.searchable ? '<input class="select-search-input" type="text" placeholder="'+placeholder+'" name="select_search_'+$(this).index()+'">' : '')}
+            <div class="load-prev"></div>
             <ul></ul>
-          <div></div>`
+          <div class="load-next"></div>`
       ).find('.select-search-sub ul').on('scroll',function(){
           //visible height + pixel scrolled = total height 
           if( $(this).innerHeight() > 300 ){
             if( this.offsetHeight + this.scrollTop == this.scrollHeight){
               if( settings.on_bottom_edge && typeof settings.on_bottom_edge == 'function' ){
-                settings.on_bottom_edge(this);
+                settings.on_bottom_edge($(this).closest('.select-search-sub'));
               }
             }
 
             if( this.scrollTop == 0 ){
               if( settings.on_top_edge && typeof settings.on_top_edge == 'function' ){
-                settings.on_top_edge(this);
+                settings.on_top_edge($(this).closest('.select-search-sub'));
               } 
             }
           }
